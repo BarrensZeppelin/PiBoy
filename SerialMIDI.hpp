@@ -1,5 +1,5 @@
-#include "wiringPi/wiringPi/wiringSerial.h"
-#include <String>
+#include <wiringSerial.h>
+#include <string>
 #include <cstdint>
 
 using namespace std;

@@ -1,4 +1,4 @@
-#include "wiringPi/wiringPi/wiringPi.h"
+#include <wiringPi.h>
 class Mode;
 
 class PiBoy {
