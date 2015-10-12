@@ -1,4 +1,6 @@
 #include <wiringPi.h>
+#include "SerialMIDI.hpp"
+
 class Mode;
 
 class PiBoy {
@@ -6,6 +8,8 @@ class PiBoy {
 		Mode* mode;
 		bool started;
 	
+		SerialMIDI serial;
+
 	public:
 		PiBoy();
 		

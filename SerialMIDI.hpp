@@ -1,3 +1,5 @@
+#pragma once
+
 #include <wiringSerial.h>
 #include <string>
 #include <cstdint>
@@ -17,4 +19,7 @@ class SerialMIDI {
 		~SerialMIDI();
 		
 		void sendByte(uint8_t b);
+		void sendString(string s);
+
+		string readString();
 };

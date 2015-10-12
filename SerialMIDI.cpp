@@ -10,9 +10,26 @@ SerialMIDI::SerialMIDI() {
 }
 
 SerialMIDI::~SerialMIDI() {
-	serialClose(ser);
+	serialClose(ser);	
 }
 
 void SerialMIDI::sendByte(uint8_t b) {
 	serialPutchar(ser, b);
+}
+
+void SerialMIDI::sendString(string s) {
+	serialPuts(ser, s.c_str());
+}
+
+
+string SerialMIDI::readString() {
+	string s = "";
+	int len;;
+
+	while(len = serialDataAvail(ser)) {
+		while(len--)
+			s += (char)serialGetchar(ser);
+	}
+
+	return s;
 }
