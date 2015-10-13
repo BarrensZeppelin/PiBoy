@@ -18,8 +18,11 @@ class SerialMIDI {
 		SerialMIDI();
 		~SerialMIDI();
 		
+		bool dataAvailable();
+
 		void sendByte(uint8_t b);
 		void sendString(string s);
 
+		uint8_t readByte();
 		string readString();
 };

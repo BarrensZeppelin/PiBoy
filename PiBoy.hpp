@@ -1,5 +1,6 @@
 #include <wiringPi.h>
 #include "SerialMIDI.hpp"
+#include "GBLink.hpp"
 
 class Mode;
 
@@ -9,6 +10,7 @@ class PiBoy {
 		bool started;
 	
 		SerialMIDI serial;
+		GBLink gblink;
 
 	public:
 		PiBoy();
