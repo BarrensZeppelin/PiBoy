@@ -7,6 +7,9 @@ const string SerialMIDI::device = "/dev/ttyAMA0";
 SerialMIDI::SerialMIDI() {
 	if((ser = serialOpen(device.c_str(), baudrate)) == -1)
 		std::cerr << "Couldn't open serial port" << std::endl;
+
+	// clear input
+	serialFlush(ser);
 }
 
 SerialMIDI::~SerialMIDI() {

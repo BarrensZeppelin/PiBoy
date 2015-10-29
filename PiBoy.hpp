@@ -7,13 +7,13 @@ class Mode;
 class PiBoy {
 	private:
 		Mode* mode;
-		bool started;
 	
 		SerialMIDI serial;
 		GBLink gblink;
 
 	public:
 		PiBoy();
-		
+		~PiBoy();
+
 		int run();
 };
