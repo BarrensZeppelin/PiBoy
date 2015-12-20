@@ -15,7 +15,7 @@ PiBoy::~PiBoy() {
 
 int PiBoy::run() {
 	
-	while(mode->isStarted())
+	while(true)
 		mode->tick();
 	
 	return 0;

@@ -1,4 +1,5 @@
 #include <wiringPi.h>
+#include <stdint.h>
 
 class GBLink {
 	public:
@@ -14,4 +15,5 @@ class GBLink {
 		void initSlave();
 		
 		void sendClock();
+		void sendByte(uint8_t send);
 };

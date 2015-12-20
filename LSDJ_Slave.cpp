@@ -24,6 +24,8 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 		case 0xFA: // start
 		case 0xFB: // continue
 			//cout << "start/continue" << endl;
+			if(data[0] != 0)
+				gblink.sendByte(data[0]);
 			start();
 			break;
 
@@ -49,6 +51,13 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 }
 
 void LSDJ_Slave::handleDataByte(uint8_t b) {
+	if(dataCapture) {
+		if(data[0] == 0) 
+			data[0] = b;
+		else {
+			data[0] = 0;
+		}
+	}
 	std::cout << "data: " << std::bitset<8>(b) << std::endl; 	
 }
 
