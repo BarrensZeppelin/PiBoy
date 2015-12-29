@@ -7,10 +7,10 @@
 
 #include "GBLink.hpp"
 
-LSDJ_Slave::LSDJ_Slave(SerialMIDI& serial, GBLink& link) : Mode(serial, link) {
+LSDJ_Slave::LSDJ_Slave(SerialMIDI& serial, GBLink& link, PinData pinData) : Mode(serial, link, pinData) {
 	data[0] = 0, data[1] = 0;
 	dataCapture = false;
-	link.initSlave();
+	link.initSlave(pinData);
 }
 
 void LSDJ_Slave::handleStatusByte(uint8_t b) {
@@ -18,14 +18,14 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 		case 0xF8: // Clock message
 			//cout << "clock" << endl;
 			if(isStarted())
-				gblink.sendClock();
+				gblink.sendClock(pinData);
 			break;
 
 		case 0xFA: // start
 		case 0xFB: // continue
 			//cout << "start/continue" << endl;
 			if(data[0] != 0)
-				gblink.sendByte(data[0]);
+				gblink.sendByte(data[0], pinData);
 			start();
 			break;
 
@@ -63,14 +63,7 @@ void LSDJ_Slave::handleDataByte(uint8_t b) {
 
 
 void LSDJ_Slave::tick() {
-	if(serial.dataAvailable()) {
-		uint8_t b = serial.readByte();
-
-		if(b & 0x80)
-			handleStatusByte(b);
-		else
-			handleDataByte(b);
-	}
+	// do nothing
 }
 
 

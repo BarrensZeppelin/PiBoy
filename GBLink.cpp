@@ -1,38 +1,32 @@
 #include "GBLink.hpp"
 
-GBLink::GBLink() {
-	for(int i = 0; i < 3; i++)
-		pinMode(i, OUTPUT);
+void GBLink::initSlave(PinData& pinData) {
+	pinMode(pinData.read, OUTPUT);
+	pinMode(pinData.write, OUTPUT);
+	pinMode(pinData.clock, OUTPUT);
 
-	digitalWrite(Pin::Clock, 1);
-	digitalWrite(Pin::Write, 0);
+	digitalWrite(pinData.clock, 1);
+	digitalWrite(pinData.write, 0);
 }
 
-void GBLink::initSlave() {
-	for(int i = 0; i < 3; i++)
-		pinMode(i, OUTPUT);
-
-	digitalWrite(Pin::Clock, 1);
-}
-
-void GBLink::sendClock() {
+void GBLink::sendClock(PinData& pinData) {
 	for(int i = 0; i < 8; i++) {
-		digitalWrite(Pin::Clock, 0);
-		digitalWrite(Pin::Clock, 1);
+		digitalWrite(pinData.clock, 0);
+		digitalWrite(pinData.clock, 1);
 	}
 }
 
 
-void GBLink::sendByte(uint8_t send) {
+void GBLink::sendByte(uint8_t send, PinData& pinData) {
 	for(int i = 0; i < 8; i++) {
-		if(send & 0x80) {
-			digitalWrite(Pin::Clock, 0);
-			digitalWrite(Pin::Write, 1);
-			digitalWrite(Pin::Clock, 1);
-		} else {
-			digitalWrite(Pin::Clock, 0);
-			digitalWrite(Pin::Write, 0);
-			digitalWrite(Pin::Clock, 1);
-		}
+		if(send & 0x80)
+			digitalWrite(pinData.write, 1);
+		else
+			digitalWrite(pinData.write, 0);
+		
+		digitalWrite(pinData.clock, 0);
+		digitalWrite(pinData.clock, 1);
+
+		send <<= 1;
 	}
 }

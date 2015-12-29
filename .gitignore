@@ -29,3 +29,6 @@
 
 
 piboy
+wiringPi.h
+wiringSerial.h
+PiBoy/

@@ -4,13 +4,11 @@
 class LSDJ_Slave : public Mode {
 	uint8_t data[2];
 	bool dataCapture;
-
-	private:
-		void handleStatusByte(uint8_t b);
-		void handleDataByte(uint8_t b);
 	
 	public:
-		LSDJ_Slave(SerialMIDI& serial, GBLink& gblink);
+		LSDJ_Slave(SerialMIDI & serial, GBLink & link, PinData pinData);
 
+		void handleStatusByte(uint8_t b);
+		void handleDataByte(uint8_t b);
 		void tick();
 };

@@ -1,19 +1,10 @@
 #include <wiringPi.h>
-#include <stdint.h>
+#include <PinData.hpp>
 
 class GBLink {
 	public:
-		enum Pin {
-			Write,
-			Clock,
-			Read
-		};
-
-	public:
-		GBLink();
-
-		void initSlave();
+		void initSlave(PinData& pinData);
 		
-		void sendClock();
-		void sendByte(uint8_t send);
+		void sendClock(PinData& pinData);
+		void sendByte(uint8_t send, PinData& pinData);
 };
