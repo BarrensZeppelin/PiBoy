@@ -2,7 +2,7 @@
 #include "SerialMIDI.hpp"
 
 class LSDJ_Slave : public Mode {
-	uint8_t data[2];
+	uint8_t startRow = 0;
 	bool dataCapture;
 	
 	public:

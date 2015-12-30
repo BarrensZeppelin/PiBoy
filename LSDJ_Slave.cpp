@@ -8,7 +8,6 @@
 #include "GBLink.hpp"
 
 LSDJ_Slave::LSDJ_Slave(SerialMIDI& serial, GBLink& link, PinData pinData) : Mode(serial, link, pinData) {
-	data[0] = 0, data[1] = 0;
 	dataCapture = false;
 	link.initSlave(pinData);
 }
@@ -24,8 +23,7 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 		case 0xFA: // start
 		case 0xFB: // continue
 			//cout << "start/continue" << endl;
-			if(data[0] != 0)
-				gblink.sendByte(data[0], pinData);
+			gblink.sendByte(startRow, pinData);
 			start();
 			break;
 
@@ -42,7 +40,7 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 				if(hi == 8)
 					dataCapture = false;
 				else if(hi == 9)
-					dataCapture = true, data[0] = 0;
+					dataCapture = true, startRow = 0;
 				else
 					cout << "status: " << std::bitset<8>(b) << endl;
 			}
@@ -52,11 +50,8 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 
 void LSDJ_Slave::handleDataByte(uint8_t b) {
 	if(dataCapture) {
-		if(data[0] == 0) 
-			data[0] = b;
-		else {
-			data[0] = 0;
-		}
+		startRow = b;
+		dataCapture = false;
 	}
 	std::cout << "data: " << std::bitset<8>(b) << std::endl; 	
 }
