@@ -1,5 +1,5 @@
 #pragma once
-#include <PinData.hpp>
+#include "PinData.hpp"
 
 class SerialMIDI;
 class GBLink;

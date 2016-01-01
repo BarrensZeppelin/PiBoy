@@ -1,6 +1,6 @@
 #include "Mode.hpp"
 
-Mode::Mode(SerialMIDI& s, GBLink& gb, PinData data) : serial(s), gblink(gb), started(true),  { // true for testing
+Mode::Mode(SerialMIDI& s, GBLink& gb, PinData data) : serial(s), gblink(gb), started(true), pinData(data) { // true for testing
 }
 
 

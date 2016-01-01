@@ -6,7 +6,7 @@ PiBoy::PiBoy() {
 	wiringPiSetup();
 	
 	// test
-	modes.push_back(new LSDJ_Slave(serial, gblink, {0, 1, 2}));
+	modes.push_back(new LSDJ_Slave(serial, gblink, {2, 1, 0}));
 }
 
 PiBoy::~PiBoy() {

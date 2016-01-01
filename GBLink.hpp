@@ -1,5 +1,5 @@
 #include <wiringPi.h>
-#include <PinData.hpp>
+#include "PinData.hpp"
 
 class GBLink {
 	public:

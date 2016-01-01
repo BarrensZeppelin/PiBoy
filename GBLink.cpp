@@ -10,10 +10,7 @@ void GBLink::initSlave(PinData& pinData) {
 }
 
 void GBLink::sendClock(PinData& pinData) {
-	for(int i = 0; i < 8; i++) {
-		digitalWrite(pinData.clock, 0);
-		digitalWrite(pinData.clock, 1);
-	}
+	sendByte(0, pinData);
 }
 
 

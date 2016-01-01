@@ -16,13 +16,15 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 	switch(b) {
 		case 0xF8: // Clock message
 			//cout << "clock" << endl;
-			if(isStarted())
+			if(isStarted()) {
 				gblink.sendClock(pinData);
+			}
 			break;
 
 		case 0xFA: // start
 		case 0xFB: // continue
 			//cout << "start/continue" << endl;
+			cout << "StartRow: " << (int)startRow << endl;
 			gblink.sendByte(startRow, pinData);
 			start();
 			break;
