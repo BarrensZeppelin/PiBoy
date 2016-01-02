@@ -6,12 +6,11 @@ PiBoy::PiBoy() {
 	wiringPiSetup();
 	
 	// test
-	modes.push_back(new LSDJ_Slave(serial, gblink, {2, 1, 0}));
+	modes.push_back(new LSDJ_Slave(gblink, {2, 1, 0}));
 }
 
 PiBoy::~PiBoy() {
 	for(Mode* mode : modes) {
-		mode->stop();
 		delete mode;
 	}
 }

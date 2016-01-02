@@ -1,7 +1,6 @@
-#include "Mode.hpp"
-#include "SerialMIDI.hpp"
+#include "GBSlave.hpp"
 
-class LSDJ_Slave : public Mode {
+class LSDJ_Slave : public GBSlave {
 	const uint8_t BEATS_PER_ROW = 16; // assumption
 
 	uint8_t startRow = 0;
@@ -9,9 +8,8 @@ class LSDJ_Slave : public Mode {
 	uint8_t midiData = 0;
 	
 	public:
-		LSDJ_Slave(SerialMIDI & serial, GBLink & link, PinData pinData);
+		LSDJ_Slave(GBLink & link, PinData pinData);
 
-		void handleStatusByte(uint8_t b);
-		void handleDataByte(uint8_t b);
-		void tick();
+		void handleStatusByte(uint8_t b) override;
+		void handleDataByte(uint8_t b) override;
 };
