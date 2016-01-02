@@ -24,21 +24,21 @@ void LSDJ_Slave::handleStatusByte(uint8_t b) {
 			break;
 
 		case MIDI::SONGPOSPTR: // song position ptr
-			dataCapture = true;
+			dataCapture = 2;
 			break;
 	}
 }
 
 void LSDJ_Slave::handleDataByte(uint8_t b) {
 	if(dataCapture) {
-		if(midiData == 0)
-			midiData = b;
+		if(dataCapture == 2)
+			midiData = b, dataCapture--;
 		else {
-			uint16_t position = (midiData << 8) + b; // combine MSB & LSB
+			uint16_t position = (b << 8) + midiData; // combine MSB & LSB
 			startRow = position / BEATS_PER_ROW; // assuming LSDJ uses 16 beats/row
 
 			midiData = 0;
-			dataCapture = false;
+			dataCapture = 0;
 		}
 	}
 }

@@ -9,7 +9,7 @@ uint8_t getChannelFromByte(uint8_t byte) {
 }
 
 void DebugSlave::handleStatusByte(uint8_t byte) {
-	if(byte & 0xF0 == 0xF0) { // system message
+	if(byte >> 4 == 0xF) { // system message
 		// neglect clock
 		if(byte == MIDI::CLOCK)
 			return;
@@ -41,7 +41,7 @@ void DebugSlave::handleStatusByte(uint8_t byte) {
 	} else { // channel message
 		std::cout << "CH " << (int)getChannelFromByte(byte) << " ";
 
-		switch(byte & 0xF0) {
+		switch((byte & 0xF0) >> 4) {
 		case MIDI::NOTEON:
 			std::cout << "Note on: ";
 			remainingData = 2;

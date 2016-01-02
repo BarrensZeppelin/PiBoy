@@ -1,11 +1,13 @@
 #include "PiBoy.hpp"
 #include "Mode.hpp"
 #include "LSDJ_Slave.hpp"
+#include "DebugSlave.hpp"
 
 PiBoy::PiBoy() {
 	wiringPiSetup();
 	
 	// test
+	modes.push_back(new DebugSlave());
 	modes.push_back(new LSDJ_Slave(gblink, {2, 1, 0}));
 }
 

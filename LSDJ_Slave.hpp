@@ -4,7 +4,7 @@ class LSDJ_Slave : public GBSlave {
 	const uint8_t BEATS_PER_ROW = 16; // assumption
 
 	uint8_t startRow = 0;
-	bool dataCapture = false;
+	uint8_t dataCapture = 0;
 	uint8_t midiData = 0;
 	
 	public:
