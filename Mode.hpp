@@ -7,4 +7,6 @@ public:
 	virtual void handleDataByte(uint8_t b) = 0;
 	
 	virtual void tick() {};
+	
+	virtual ~Mode() {}
 };
