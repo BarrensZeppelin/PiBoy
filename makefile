@@ -1,5 +1,5 @@
 
-CXXFLAGS = -std=c++11 -Wall -lwiringPi
+CXXFLAGS = -std=c++11 -Wall -lwiringPi -MMD
 CXX = g++
 
 SOURCES = $(wildcard *.cpp)
@@ -20,5 +20,4 @@ run: all
 	./pboy
 
 
-CC_FLAGS += -MMD
 -include $(OBJECTS:.o=.d)

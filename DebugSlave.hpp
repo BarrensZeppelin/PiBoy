@@ -1,8 +1,8 @@
 #pragma once
-#include "Mode.hpp"
+#include "Slave.hpp"
 #include <cstdint>
 
-class DebugSlave : public Mode {
+class DebugSlave : public Slave {
 	uint8_t data = 0;
     uint8_t remainingData = 0;
     uint8_t status = 0;

@@ -3,11 +3,11 @@
 #include "GBLink.hpp"
 #include <vector>
 
-class Mode;
+class Slave;
 
 class PiBoy {
 	private:
-		std::vector<Mode*> modes;
+		std::vector<Slave*> slaves;
 	
 		SerialMIDI serial;
 		GBLink gblink;

@@ -1,10 +1,10 @@
 #pragma once
-#include "Mode.hpp"
+#include "Slave.hpp"
 #include "PinData.hpp"
 
 class GBLink;
 
-class GBSlave : public Mode {
+class GBSlave : public Slave {
 protected:
     GBLink& gblink;
     PinData pinData;

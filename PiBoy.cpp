@@ -1,19 +1,22 @@
 #include "PiBoy.hpp"
-#include "Mode.hpp"
+#include "Slave.hpp"
 #include "LSDJ_Slave.hpp"
 #include "DebugSlave.hpp"
+#include "LEDSyncSlave.hpp"
 
 PiBoy::PiBoy() {
 	wiringPiSetup();
 	
+	slaves.push_back(new LSDJ_Slave(gblink, {2, 1, 0}));
+	
 	// test
-	modes.push_back(new DebugSlave());
-	modes.push_back(new LSDJ_Slave(gblink, {2, 1, 0}));
+	slaves.push_back(new DebugSlave());
+	slaves.push_back(new LEDSyncSlave(3));
 }
 
 PiBoy::~PiBoy() {
-	for(Mode* mode : modes) {
-		delete mode;
+	for(Slave* slave : slaves) {
+		delete slave;
 	}
 }
 
@@ -24,15 +27,15 @@ int PiBoy::run() {
 			uint8_t b = serial.readByte();
 
 			if(b & 0x80) {
-				for(Mode* mode : modes)
-					mode->handleStatusByte(b);
+				for(Slave* slave : slaves)
+					slave->handleStatusByte(b);
 			} else {
-				for(Mode* mode : modes)
-					mode->handleDataByte(b);
+				for(Slave* slave : slaves)
+					slave->handleDataByte(b);
 			}
 		
-			for(Mode* mode : modes)
-				mode->tick();
+			for(Slave* slave : slaves)
+				slave->tick();
 		}
 	}
 	
